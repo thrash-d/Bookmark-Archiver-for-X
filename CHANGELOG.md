@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.9
+
+- Renamed to "Bookmark Archiver for X" (extension name, popup, options, privacy policy) for the Chrome Web Store listing.
+
 ## 1.4.8
 
 - Set the Buy me a coffee link to the project's real handle.

@@ -1,6 +1,6 @@
 {
   "name": "x-bookmark-downloader",
-  "version": "1.4.8",
+  "version": "1.4.9",
   "description": "Local-only export of your X bookmarks (metadata, photos, videos) with date-range filtering.",
   "license": "MIT",
   "scripts": {

@@ -1,6 +1,6 @@
 # Privacy policy
 
-X Bookmark Archiver runs entirely on your own computer. It has no backend.
+Bookmark Archiver for X runs entirely on your own computer. It has no backend.
 
 ## What the extension does
 

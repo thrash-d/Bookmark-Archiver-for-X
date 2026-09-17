@@ -7,6 +7,8 @@ xhar.txt
 bookmarks.json
 archive/
 media/
+dist/
+*.zip
 
 # Node
 node_modules/
