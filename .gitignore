@@ -1,0 +1,12 @@
+# Session/identity leakage — never commit
+debugging/
+*.har
+xhar.txt
+
+# Exported personal data + build output
+bookmarks.json
+archive/
+media/
+
+# Node
+node_modules/

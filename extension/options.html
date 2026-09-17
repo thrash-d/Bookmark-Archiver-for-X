@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>X Bookmark Archiver options</title>
+<style>
+  :root {
+    --bg: #15202b; --panel: #1c2732; --line: #2a3540; --line-strong: #38444d;
+    --fg: #e7e9ea; --muted: #8b98a5; --accent: #1d9bf0; --danger: #e5484d;
+    --radius: 6px;
+  }
+  body { font: 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--fg); margin: 0; font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 480px; margin: 0 auto; padding: 24px 20px; }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 24px; }
+  .field { margin: 0 0 28px; }
+  label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  input[type="number"] { width: 120px; padding: 6px 8px; background: var(--panel); border: 1px solid var(--line-strong); color: var(--fg); border-radius: var(--radius); font: inherit; font-size: 13px; }
+  input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .actions { display: flex; align-items: center; gap: 16px; margin-top: 10px; }
+  button { padding: 6px 14px; border: 1px solid transparent; border-radius: var(--radius); font: inherit; font-weight: 500; cursor: pointer; }
+  #save { background: var(--accent); border-color: var(--accent); color: #fff; }
+  #redownload { background: transparent; border-color: var(--line-strong); color: var(--fg); }
+  #clear { background: transparent; color: var(--danger); padding-left: 0; padding-right: 0; }
+  #clear:hover, #redownload:hover { text-decoration: underline; }
+  #saved { color: var(--muted); font-size: 12px; margin-left: 10px; }
+  .about { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+  .about p { margin: 0 0 8px; }
+  .about a { color: var(--accent); text-decoration: none; }
+  .about a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Options</h1>
+
+  <div class="field">
+    <label for="scrollDelay">Scroll delay (ms)</label>
+    <input type="number" id="scrollDelay" min="800" max="10000" step="100">
+    <div class="hint">Time between scrolls while collecting. Default is 2200. If X rate-limits you, raise it.</div>
+  </div>
+
+  <div class="field">
+    <label>Archived history (used by "Only new since last run")</label>
+    <div class="row">
+      <span class="hint" id="archivedCount"></span>
+    </div>
+    <div class="actions">
+      <button id="redownload">Re-download all media</button>
+      <button id="clear">Reset library</button>
+    </div>
+    <div class="hint"><strong>Re-download all media</strong> keeps your bookmarks but forgets which media was saved, so the next run fetches every photo and video again. Use it if media files went missing or the gallery shows blanks. <strong>Reset library</strong> forgets everything and starts over.</div>
+  </div>
+
+  <div class="field">
+    <button id="save">Save</button>
+    <span id="saved"></span>
+  </div>
+
+  <div class="about">
+    <p>This extension runs entirely on your machine. Nothing leaves it: no servers, no telemetry, no tracking.</p>
+    <p><a href="https://buymeacoffee.com/YOURHANDLE" target="_blank" rel="noopener">Buy me a coffee ☕</a></p>
+  </div>
+</div>
+<script src="options.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #15202b; --panel: #1c2732; --line: #2a3540; --line-strong: #38444d;
+    --fg: #e7e9ea; --muted: #8b98a5; --accent: #1d9bf0; --danger: #e5484d;
+    --radius: 6px;
+  }
+  body { width: 290px; margin: 0; font: 14px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif; background: var(--bg); color: var(--fg); font-variant-numeric: tabular-nums; }
+  .wrap { padding: 16px; }
+  h1 { font-size: 14px; font-weight: 600; margin: 0 0 2px; }
+  .sub { font-size: 12px; color: var(--muted); margin: 0 0 16px; }
+  label { display: block; font-size: 12px; color: var(--muted); margin: 12px 0 4px; }
+  select, input[type="date"] { width: 100%; padding: 6px 8px; background: var(--panel); border: 1px solid var(--line-strong); color: var(--fg); border-radius: var(--radius); font: inherit; font-size: 13px; }
+  select:focus, input:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+  .row input { margin: 0; accent-color: var(--accent); }
+  .row label { margin: 0; color: var(--fg); }
+  #since { display: none; margin-top: 6px; }
+  button { width: 100%; padding: 8px; border: 1px solid transparent; border-radius: var(--radius); font: inherit; font-weight: 500; cursor: pointer; margin-top: 16px; }
+  #go { background: var(--accent); border-color: var(--accent); color: #fff; }
+  #cancel { background: transparent; border-color: var(--danger); color: var(--danger); display: none; }
+  button:disabled { background: var(--line-strong); border-color: var(--line-strong); color: var(--muted); cursor: default; }
+  #status { margin-top: 12px; font-size: 12px; color: var(--muted); min-height: 16px; }
+  #summary { margin-top: 8px; font-size: 12px; color: var(--fg); }
+  #summary div { display: flex; justify-content: space-between; padding: 2px 0; }
+  #summary .k { color: var(--muted); }
+  .support { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+  .support a { color: var(--accent); text-decoration: none; }
+  .support a:hover { text-decoration: underline; }
+  .ver { float: right; font-weight: 400; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>X Bookmark Archiver <span class="ver" id="ver"></span></h1>
+  <p class="sub">Runs on x.com. 100% local.</p>
+
+  <label for="range">Date range (by tweet post date)</label>
+  <select id="range">
+    <option value="all">All bookmarks</option>
+    <option value="1">Last 1 day</option>
+    <option value="7">Last 7 days</option>
+    <option value="30">Last 30 days</option>
+    <option value="90">Last 90 days</option>
+    <option value="since">Since a date…</option>
+  </select>
+  <input type="date" id="since">
+
+  <div class="row" id="earlyRow">
+    <input type="checkbox" id="earlyStop" checked>
+    <label for="earlyStop">Stop scrolling after passing the range (faster)</label>
+  </div>
+
+  <div class="row">
+    <input type="checkbox" id="incremental">
+    <label for="incremental">Only new since last run</label>
+  </div>
+
+  <button id="go">Archive bookmarks</button>
+  <button id="cancel">Stop</button>
+
+  <div id="status"></div>
+  <div id="summary"></div>
+
+  <div class="support">
+    <a href="#" id="opts">Options</a>
+  </div>
+</div>
+<script src="popup.js"></script>
+</body>
+</html>
