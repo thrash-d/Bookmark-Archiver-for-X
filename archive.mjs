@@ -8,7 +8,7 @@ import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
 const { build: buildGallery } = require(join(dirname(fileURLToPath(import.meta.url)), "extension", "gallery.js"));
 
-const SUPPORT_URL = "https://buymeacoffee.com/YOURHANDLE";
+const SUPPORT_URL = "https://buymeacoffee.com/pianowaterfall";
 const CONCURRENCY = 4;
 const MAX_RETRIES = 3;
 

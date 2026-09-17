@@ -105,9 +105,6 @@ click **Details**, and then click **Extension options**.
   the next run fetches every photo and video again.
 - **Reset library**: forgets everything and starts over.
 
-To set your tip link, edit `SUPPORT_URL` at the top of `archive.mjs` and the `YOURHANDLE`
-link in `extension/popup.html`.
-
 ## Privacy
 
 See `PRIVACY.md`. In short: 100% local, no servers, no telemetry, and the extension never

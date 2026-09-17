@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.8
+
+- Set the Buy me a coffee link to the project's real handle.
+
 ## 1.4.7
 
 - Gallery header and search bar now align with the content column instead of spanning the full window width, fixing the top-heavy look on wide screens.

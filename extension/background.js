@@ -4,7 +4,7 @@ const DIR = "x-bookmarks";
 const LIB_KEY = "xba_library";
 const DONE_KEY = "xba_media_done";
 const MAX_RETRIES = 3;
-const SUPPORT_URL = "https://buymeacoffee.com/YOURHANDLE";
+const SUPPORT_URL = "https://buymeacoffee.com/pianowaterfall";
 
 chrome.runtime.onMessage.addListener((msg) => {
   if (msg.type === "archive") {
