@@ -24,13 +24,18 @@ async function archive(newRecords) {
 
   const full = Object.values(lib);
 
+  // Write the gallery and JSON FIRST, before any media download. The media backfill below
+  // can run long enough for the MV3 service worker to be killed mid-loop; if the writes
+  // came after it, new bookmarks would sit in the library but never reach disk. Media file
+  // links are deterministic, so the gallery references the right filenames whether or not a
+  // given file has downloaded yet. A file still in flight shows a broken image until the
+  // backfill (this run or the next) fetches it.
+  await writeOutputs(full, deterministicIndex(full));
+  relay({ type: "library_saved", libraryTotal: full.length });
+
   let ok = 0, fail = 0;
   const failures = [];
 
-  // Backfill the whole library, not just this run. The gallery is built from the full
-  // library, so media from earlier runs that never finished must be fetched here or the
-  // gallery points at missing files. `done` holds confirmed downloads so reruns skip them;
-  // "overwrite" prevents `file (1)` duplicates.
   for (const rec of full) {
     let idx = 0;
     for (const m of rec.media || []) {
@@ -41,14 +46,40 @@ async function archive(newRecords) {
       const saved = await downloadRetry(m.url, `${DIR}/media/${key}`, "overwrite");
       if (saved) { ok++; done.add(key); }
       else { fail++; failures.push({ id: rec.id, url: m.url }); }
-      await sleep(300);
+      await sleep(120);
       relay({ type: "download_progress", ok, fail });
     }
   }
   await save(DONE_KEY, Array.from(done));
 
-  // Link only media confirmed on disk so the gallery never points at a missing file.
-  const index = full.map((r) => ({
+  // Only failed downloads need a cleanup pass, to drop links to media that isn't on disk.
+  if (failures.length) {
+    await saveData(`${DIR}/failures.json`, JSON.stringify(failures, null, 2), "application/json", "overwrite");
+    await writeOutputs(full, confirmedIndex(full, done));
+  }
+
+  relay({ type: "downloads_done", ok, fail, libraryTotal: full.length });
+}
+
+async function writeOutputs(full, index) {
+  await saveData(`${DIR}/bookmarks.json`, JSON.stringify(index, null, 2), "application/json", "overwrite");
+  if (self.XBAGallery) {
+    await saveData(`${DIR}/index.html`, self.XBAGallery.build(index, SUPPORT_URL), "text/html", "overwrite");
+  }
+}
+
+function deterministicIndex(full) {
+  return full.map((r) => ({
+    ...r,
+    media: (r.media || []).map((m, i) => {
+      const isFile = m.type === "photo" || m.type === "video";
+      return { ...m, file: isFile ? mediaKey(r, m, i + 1) : null };
+    })
+  }));
+}
+
+function confirmedIndex(full, done) {
+  return full.map((r) => ({
     ...r,
     media: (r.media || []).map((m, i) => {
       const isFile = m.type === "photo" || m.type === "video";
@@ -56,16 +87,6 @@ async function archive(newRecords) {
       return { ...m, file: isFile && done.has(key) ? key : null };
     })
   }));
-
-  await saveData(`${DIR}/bookmarks.json`, JSON.stringify(index, null, 2), "application/json", "overwrite");
-  if (failures.length) {
-    await saveData(`${DIR}/failures.json`, JSON.stringify(failures, null, 2), "application/json", "overwrite");
-  }
-  if (self.XBAGallery) {
-    await saveData(`${DIR}/index.html`, self.XBAGallery.build(index, SUPPORT_URL), "text/html", "overwrite");
-  }
-
-  relay({ type: "downloads_done", ok, fail, libraryTotal: full.length });
 }
 
 function mediaKey(rec, m, idx) {

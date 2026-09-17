@@ -134,7 +134,8 @@ chrome.runtime.onMessage.addListener((msg) => {
     ]);
     if (msg.kept === 0) running(false);
   }
-  else if (msg.type === "download_progress") setStatus(`Downloading… ${msg.ok} ok, ${msg.fail} failed`);
+  else if (msg.type === "library_saved") setStatus(`Saved ${msg.libraryTotal} bookmarks. Fetching media…`);
+  else if (msg.type === "download_progress") setStatus(`Downloading media… ${msg.ok} ok, ${msg.fail} failed`);
   else if (msg.type === "downloads_done") {
     running(false);
     setStatus(`Done. Open Downloads/x-bookmarks/index.html.`);

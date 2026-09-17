@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.10
+
+- Fixed new bookmarks not appearing in the gallery. The gallery and JSON were written after the media backfill loop, which on a larger library ran long enough for the background service worker to be terminated first, so the files never updated. The gallery and JSON are now written before any media downloads, so every captured bookmark reaches disk regardless of how long media takes or whether the worker is stopped. Media file links are deterministic; a file still downloading shows a broken image until the next pass fetches it. Shortened the per-file delay to reduce total run time.
+
 ## 1.4.9
 
 - Renamed to "Bookmark Archiver for X" (extension name, popup, options, privacy policy) for the Chrome Web Store listing.
