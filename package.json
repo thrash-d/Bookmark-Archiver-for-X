@@ -4,6 +4,7 @@
   "description": "Local-only export of your X bookmarks (metadata, photos, videos) with date-range filtering.",
   "license": "MIT",
   "scripts": {
+    "build": "node build.mjs",
     "test": "node tests/parser.test.cjs",
     "archive": "node archive.mjs"
   },

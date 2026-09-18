@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
 
 const require = createRequire(import.meta.url);
-const { build: buildGallery } = require(join(dirname(fileURLToPath(import.meta.url)), "extension", "gallery.js"));
+const { build: buildGallery } = require(join(dirname(fileURLToPath(import.meta.url)), "shared", "gallery.js"));
 
 const SUPPORT_URL = "https://buymeacoffee.com/thrashd";
 const CONCURRENCY = 4;

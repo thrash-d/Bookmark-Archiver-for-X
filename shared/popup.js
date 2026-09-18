@@ -1,3 +1,6 @@
+// Firefox exposes promise-based tabs APIs on `browser`; Chrome MV3 returns promises on
+// `chrome`. Use whichever gives promises so `await tabs.query(...)` works in both.
+const api = (typeof browser !== "undefined" && browser.runtime) ? browser : chrome;
 const $ = (id) => document.getElementById(id);
 const goBtn = $("go");
 const cancelBtn = $("cancel");
@@ -80,9 +83,9 @@ async function getSettings() {
 }
 
 goBtn.addEventListener("click", async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const [tab] = await api.tabs.query({ active: true, currentWindow: true });
   if (!tab || !/^https:\/\/(x|twitter)\.com/.test(tab.url || "")) {
-    await chrome.tabs.create({ url: "https://x.com/i/history" });
+    await api.tabs.create({ url: "https://x.com/i/history" });
     setStatus("Opened your bookmarks — click the icon again to start.");
     return;
   }
@@ -97,7 +100,7 @@ goBtn.addEventListener("click", async () => {
   running(true);
   setStatus("Starting…");
   try {
-    await chrome.tabs.sendMessage(tab.id, { cmd: "start", opts });
+    await api.tabs.sendMessage(tab.id, { cmd: "start", opts });
     setStatus("Running — you can close this popup.");
   } catch (_) {
     setStatus("Reload the X tab, then try again.");
@@ -106,8 +109,8 @@ goBtn.addEventListener("click", async () => {
 });
 
 cancelBtn.addEventListener("click", async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-  try { await chrome.tabs.sendMessage(tab.id, { cmd: "cancel" }); } catch (_) {}
+  const [tab] = await api.tabs.query({ active: true, currentWindow: true });
+  try { await api.tabs.sendMessage(tab.id, { cmd: "cancel" }); } catch (_) {}
   setStatus("Stopping…");
 });
 

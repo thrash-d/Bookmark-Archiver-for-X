@@ -3,11 +3,15 @@
 Exports your X (Twitter) bookmarks to disk: metadata, photos, and videos. Everything runs
 on your machine. Nothing is uploaded anywhere.
 
-The project has two parts:
+The repository is laid out like this:
 
-- `extension/`: an unpacked Chrome or Edge extension. One click scrolls your bookmarks,
-  captures the data from X's own API responses, and saves `bookmarks.json` plus photos
-  and MP4 videos to your Downloads folder. Supports date-range filtering.
+- `shared/`: the code both browser builds use (parser, gallery, capture, popup, options,
+  icons). Edit the extension here.
+- `chrome/`: the Chrome or Edge build. Holds only the Chrome-specific `manifest.json` and
+  `background.js`; `build.mjs` copies `shared/` in beside them.
+- `firefox/`: the Firefox build. Same idea, with a Firefox `manifest.json` and
+  `background.js`. See `firefox/README.md` for the one behavioral difference (Firefox writes
+  a timestamped snapshot folder per run, because its download API can't overwrite files).
 - `archive.mjs`: a Node script that reads `bookmarks.json` and builds an organized copy
   (searchable HTML gallery, CSV, NDJSON) in a folder you choose. It also downloads HLS-only
   videos, which the browser can't save on its own. HLS downloads require `ffmpeg`.
@@ -15,11 +19,25 @@ The project has two parts:
 The extension handles the part that needs your signed-in session. The Node script handles
 bulk media downloading, which uses public CDN URLs and needs no sign-in.
 
+## Build
+
+The shared code lives in `shared/` and is copied into each browser build. After a fresh
+clone or any change under `shared/`, run:
+
+```
+node build.mjs
+```
+
+This populates `chrome/` and `firefox/` with the shared files. The copies are build output
+and are not committed; only `shared/` and each build's `manifest.json` and `background.js`
+are tracked.
+
 ## Load the extension
 
-1. Open `chrome://extensions` (or `edge://extensions`).
-2. Turn on **Developer mode**.
-3. Click **Load unpacked** and select the `extension/` folder.
+1. Run `node build.mjs` (see above).
+2. Open `chrome://extensions` (or `edge://extensions`).
+3. Turn on **Developer mode**.
+4. Click **Load unpacked** and select the `chrome/` folder. (Firefox: see `firefox/README.md`.)
 
 ## Run the one-click archive
 

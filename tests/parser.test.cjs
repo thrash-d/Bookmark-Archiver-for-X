@@ -1,5 +1,5 @@
 const assert = require("node:assert");
-const { collectEntries } = require("../extension/parser.js");
+const { collectEntries } = require("../shared/parser.js");
 
 function entry(result) {
   return { content: { itemContent: { tweet_results: { result } } } };

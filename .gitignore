@@ -10,5 +10,19 @@ media/
 dist/
 *.zip
 
+# Store assets (kept out of the repo)
+screenshots/
+promo/
+
+# Build output: shared/ is copied into chrome/ and firefox/ by build.mjs.
+# Only the per-browser files (manifest.json, background.js) and firefox/README.md are tracked.
+chrome/*
+!chrome/manifest.json
+!chrome/background.js
+firefox/*
+!firefox/manifest.json
+!firefox/background.js
+!firefox/README.md
+
 # Node
 node_modules/

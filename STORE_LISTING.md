@@ -80,7 +80,7 @@ nothing.
 
 Host `PRIVACY.md` somewhere public and paste the link. Easiest option: your
 GitHub repo file, e.g.
-https://github.com/pianowaterfall/Bookmark-Archiver-for-X/blob/main/PRIVACY.md
+https://github.com/thrash-d/Bookmark-Archiver-for-X/blob/main/PRIVACY.md
 
 ## Screenshots (required: 1–5, 1280x800 or 640x400 PNG/JPG)
 
