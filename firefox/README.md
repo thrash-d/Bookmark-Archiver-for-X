@@ -1,4 +1,4 @@
-# Bookmark Archiver for X — Firefox
+# Bookmark Archiver for X on Firefox
 
 Firefox port of the Chrome extension. Same feature set: one-click capture of your X
 bookmarks (text, photos, videos), date-range filtering, a cumulative library, and a
