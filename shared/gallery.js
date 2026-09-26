@@ -72,7 +72,7 @@
   const folders = Array.from(new Set(DATA.map(r => r.folder).filter(Boolean))).sort();
   folderFilter.innerHTML = '<option value="all">All folders</option>'
     + (folders.length ? '<option value="__none">(No folder)</option>' : '')
-    + folders.map(f => '<option value="'+f.replace(/"/g,'&quot;')+'">'+f+'</option>').join("");
+    + folders.map(f => '<option value="'+esc(f)+'">'+esc(f)+'</option>').join("");
   folderFilter.style.display = folders.length ? "" : "none";
   function esc(s){ return (s||"").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
   function hasType(r,t){ return (r.media||[]).some(m => t==="photo" ? m.type==="photo" : m.type==="video"||m.type==="video_hls"); }
@@ -83,7 +83,7 @@
     const items = ms.map(m => {
       if(m.file && m.type==="photo") return '<img loading="lazy" src="media/'+encodeURIComponent(m.file)+'">';
       if(m.file) return '<video controls preload="none" src="media/'+encodeURIComponent(m.file)+'"></video>';
-      return '<div class="missing">Video not downloaded (needs ffmpeg) — <a class="src" href="'+esc(r.url)+'" target="_blank" rel="noopener">view on X</a></div>';
+      return '<div class="missing">Not downloaded — <a class="src" href="'+esc(r.url)+'" target="_blank" rel="noopener">view on X</a></div>';
     }).join("");
     return '<div class="'+cls+'">'+items+'</div>';
   }
