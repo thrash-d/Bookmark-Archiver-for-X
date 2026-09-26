@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.12
+
+- Chrome saves media progress every 25 downloads instead of only at the end. A large backfill could be stopped by Chrome before it finished, and it then restarted from zero on every run.
+- The exported gallery escapes folder names in the folder filter, so HTML in a bookmark folder name no longer renders.
+- A missing file in the gallery says "Not downloaded" instead of blaming ffmpeg, since it can also be a photo that failed to download.
+- The Chrome toolbar tooltip and the on-page status badge use the extension's name, Bookmark Archiver for X.
+- Removed an unused helper from `archive.mjs`.
+
 ## 1.4.11
 
 - The exported gallery footer names the extension Bookmark Archiver for X instead of its old working name, x-bookmark-downloader.
