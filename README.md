@@ -1,4 +1,4 @@
-# x-bookmark-downloader
+# Bookmark Archiver for X
 
 Exports your X (Twitter) bookmarks to disk: metadata, photos, and videos. Everything runs
 on your machine. Nothing is uploaded anywhere.
