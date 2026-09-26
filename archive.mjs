@@ -171,7 +171,6 @@ function imgExt(url) {
   } catch (_) {}
   return "jpg";
 }
-function sanitize(s) { return String(s).replace(/[^a-z0-9_-]/gi, "_").slice(0, 40); }
 function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
 function toCsv(index) {
