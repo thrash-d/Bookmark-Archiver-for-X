@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bookmark Archiver for X",
-  "version": "1.4.10",
+  "version": "1.4.11",
   "description": "One-click, 100% local export of your X bookmarks (metadata, photos, videos) to disk, with date-range filtering.",
   "permissions": ["downloads", "storage", "unlimitedStorage"],
   "host_permissions": [

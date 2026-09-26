@@ -57,7 +57,7 @@
 </header>
 <main id="list"></main>
 <footer>
-  Archived locally with x-bookmark-downloader. Nothing left your machine.
+  Archived locally with Bookmark Archiver for X. Nothing left your machine.
   <br>Like it? <a href="${supportUrl}" target="_blank" rel="noopener">Buy me a coffee ☕</a>
 </footer>
 <script id="data" type="application/json">${data}</script>
