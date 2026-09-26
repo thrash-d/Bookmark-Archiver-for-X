@@ -44,7 +44,13 @@ async function archive(newRecords) {
       const key = mediaKey(rec, m, idx);
       if (done.has(key)) continue;
       const saved = await downloadRetry(m.url, `${DIR}/media/${key}`, "overwrite");
-      if (saved) { ok++; done.add(key); }
+      if (saved) {
+        ok++;
+        done.add(key);
+        // Save progress as we go: Chrome can stop this worker mid-loop, and a set saved only
+        // at the end would restart a large backfill from zero on every run.
+        if (ok % 25 === 0) await save(DONE_KEY, Array.from(done));
+      }
       else { fail++; failures.push({ id: rec.id, url: m.url }); }
       await sleep(120);
       relay({ type: "download_progress", ok, fail });

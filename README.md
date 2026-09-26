@@ -36,24 +36,24 @@ are tracked.
 
 1. Run `node build.mjs` (see above).
 2. Open `chrome://extensions` (or `edge://extensions`).
-3. Turn on **Developer mode**.
-4. Click **Load unpacked** and select the `chrome/` folder. (Firefox: see `firefox/README.md`.)
+3. Turn on `Developer mode`.
+4. Click `Load unpacked` and select the `chrome/` folder. (Firefox: see `firefox/README.md`.)
 
 ## Run the one-click archive
 
 1. Sign in to x.com and open your bookmarks at `x.com/i/history`.
 2. Open the extension popup.
-3. Choose a **Date range**: all, last 1, 7, 30, or 90 days, or since a date. The range
+3. Choose a `Date range`: all, last 1, 7, 30, or 90 days, or since a date. The range
    filters by the tweet's post date. X orders bookmarks by when you saved them and doesn't
    expose that timestamp, so the filter can't use the bookmark date.
-4. Leave **Stop scrolling after passing the range** on to end the run as soon as it stops
+4. Leave `Stop scrolling after passing the range` on to end the run as soon as it stops
    finding new in-range bookmarks. This option is on by default for every range except
-   **All bookmarks**, and it's what makes a short range finish fast. Because bookmark order
+   `All bookmarks`, and it's what makes a short range finish fast. Because bookmark order
    isn't post-date order, it can miss an old post that you bookmarked recently. To scan
    everything and filter at the end, turn it off.
-5. Optional: select **Only new since last run** to skip bookmarks you already archived.
-6. Click **Archive bookmarks**. A badge on the page shows progress, and the popup shows a
-   running summary. To end early and keep what's collected, click **Stop**.
+5. Optional: select `Only new since last run` to skip bookmarks you already archived.
+6. Click `Archive bookmarks`. A badge on the page shows progress, and the popup shows a
+   running summary. To end early and keep what's collected, click `Stop`.
 
 Output lands in a single library folder, `Downloads/x-bookmarks/`:
 
@@ -73,7 +73,7 @@ keyed by tweet ID and media files are named by ID, so:
 - `bookmarks.json` and `index.html` are overwritten with the current full library each run.
 
 You can run the archive weekly with a short date range and the library accumulates. To start
-over, open **Options** and click **Reset library**.
+over, open `Options` and click `Reset library`.
 
 Longer videos that X serves only as HLS are recorded in `bookmarks.json` with the
 `video_hls` type but aren't downloaded by the extension. The Node script downloads those.
@@ -81,11 +81,11 @@ Longer videos that X serves only as HLS are recorded in `bookmarks.json` with th
 ## Archive bookmark folders
 
 To archive a folder, open it on X (`x.com/i/bookmarks/FOLDER_ID`) and click
-**Archive bookmarks**. The extension captures that folder's timeline, tags each bookmark
+`Archive bookmarks`. The extension captures that folder's timeline, tags each bookmark
 with the folder name, and merges it into your library. Repeat for each folder you want.
 The gallery's folder list and the `folder` column in `index.csv` let you filter by folder
 afterward. Bookmarks archived from the main bookmarks or history page show as
-**No folder**.
+`No folder`.
 
 There's no single control that walks every folder automatically. You archive each folder
 you open, and they all accumulate into one library.
@@ -115,13 +115,13 @@ many to rerun for after you install it.
 
 ## Configure the extension
 
-To open the options page, click **Options** in the popup, or open `chrome://extensions`,
-click **Details**, and then click **Extension options**.
+To open the options page, click `Options` in the popup, or open `chrome://extensions`,
+click `Details`, and then click `Extension options`.
 
-- **Scroll delay**: if X rate-limits you, raise it.
-- **Re-download all media**: keeps your bookmarks but forgets which media was saved, so
+- `Scroll delay`: if X rate-limits you, raise it.
+- `Re-download all media`: keeps your bookmarks but forgets which media was saved, so
   the next run fetches every photo and video again.
-- **Reset library**: forgets everything and starts over.
+- `Reset library`: forgets everything and starts over.
 
 ## Privacy
 
