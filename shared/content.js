@@ -193,7 +193,7 @@
         "border:1px solid #38444d;box-shadow:0 4px 16px rgba(0,0,0,.4);max-width:320px";
       document.body.appendChild(el);
     }
-    el.textContent = "X Archiver: " + msg;
+    el.textContent = "Bookmark Archiver for X: " + msg;
   }
 
   function sleep(ms) { return new Promise((r) => setTimeout(r, ms)); }

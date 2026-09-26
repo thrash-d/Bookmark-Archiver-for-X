@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Bookmark Archiver for X",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "One-click, 100% local export of your X bookmarks (metadata, photos, videos) to disk, with date-range filtering.",
   "permissions": ["downloads", "storage", "unlimitedStorage"],
   "host_permissions": [
@@ -24,7 +24,7 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "X Bookmark Archiver",
+    "default_title": "Bookmark Archiver for X",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png",
